@@ -1,0 +1,14 @@
+.course-list-item .label {
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.course-list-item .comment {
+    font-size: 0.9rem;
+    color: grey;
+}
+
+.course-list-item button {
+    width: 50px;
+  }

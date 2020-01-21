@@ -1,14 +1,15 @@
 import React from 'react';
 
-const CourseListItem = ({ name, comment }) => {
-    let className = 'course-list-item';
+import './course-list-item.css';
+
+const CourseListItem = ({ label, comment }) => {
     return (
-        <span className={className}>        
-            <span>{name}</span>
-            <span>{comment}</span>
-            <button type="button">
-                <b>Edit</b>
+        <span className="course-list-item">        
+            <div className="label">{label}</div>
+            <button type="button" className="btn btn-outline-warning btn-sm float-right">
+                <span className="fa fa-pencil-square-o"></span>
             </button>
+            <div className="comment">{comment}</div>
         </span>
     );
 };

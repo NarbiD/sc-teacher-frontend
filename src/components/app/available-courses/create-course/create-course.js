@@ -1,8 +1,13 @@
 import React from 'react';
-import CourseList from '../course-list/course-list';
+
+import './create-course.css'
 
 const CreateCourse = () => {
-    return <button type="button">Add</button>
+    return <button type="button"
+                 className="btn btn-outline-primary float-right create-course-button">
+                     <span className="fa fa-plus"></span>
+                     <span> Створити курс</span>
+            </button>
 }
 
 export default CreateCourse;
