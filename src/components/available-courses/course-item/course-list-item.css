@@ -9,6 +9,13 @@
     color: grey;
 }
 
+.course-list-item .duration {
+    font-size: 0.9rem;
+    color: grey;
+    margin-left: 4px;
+    display: inline-block;
+}
+
 .course-list-item button {
     width: 50px;
   }
