@@ -2,6 +2,9 @@ import React from 'react';
 import './App.css';
 
 import AvailableCourses from '../available-courses/available-courses';
+import Header from '../header/header';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import CreateCourse from '../create-course/create-course';
 
 export default class App extends React.Component {
@@ -27,15 +30,39 @@ export default class App extends React.Component {
       entry
     ];
     this.setState({items: currentItems});
-    console.log(this.state.items);
   };
+
+  createCourse() {
+    return 
+  }
 
   render(){
     return (
       <div className="App">
-        <AvailableCourses items={this.state.items} />
-        <br />
-        <CreateCourse onCreate={ (item) => this.addItem(item) } />
+        <Router>
+          <Header />
+          <Route path="/"
+                 render={ () => <h2>Welcome</h2> }
+                 exact />
+          <Route path="/courses/"
+                 render={ () => 
+                  <AvailableCourses 
+                    items={this.state.items} 
+                  /> }
+                 exact />
+          <Route path="/create-course/"
+                 render={ () => 
+                  <CreateCourse
+                    onCreate={ (item) => this.addItem(item) }
+                  /> }
+                  exact />
+          <Route path="/sign-in/>"
+                 render={ () => <h2>Авторизація викладача</h2> }
+                 />
+          <Route path="/sign-in/>"
+                 render={ () => <h2>Реєстрація нового викладача</h2> }
+                 />
+        </Router>
       </div>
     );
   } 

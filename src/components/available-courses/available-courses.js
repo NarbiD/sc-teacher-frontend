@@ -3,12 +3,12 @@ import CourseList from './course-list/course-list';
 import CreateCourse from './create-course/create-course';
 import Title from './title/title';
 
-const AvailableCourses = ({ items }) => {
+const AvailableCourses = ({ items, onCreate }) => {
     return (
         <div>
             <Title />
             <CourseList items={ items } />
-            <CreateCourse />
+            <CreateCourse onCreate={ onCreate } />
         </div>
     );
 }

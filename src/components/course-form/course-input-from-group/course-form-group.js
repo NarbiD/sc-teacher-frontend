@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
-export default class CourseFormGroup extends Component{
+import {
+	withRouter
+} from 'react-router-dom';
+
+class CourseFormGroup extends Component{
 
     state = {
         label: '',
@@ -22,6 +26,7 @@ export default class CourseFormGroup extends Component{
     onSubmit = (e) => {
         e.preventDefault();
         this.props.onSub(this.state);
+        this.props.history.push("/courses/");
     }
 
     render() {
@@ -85,3 +90,5 @@ export default class CourseFormGroup extends Component{
         </form>)
     };
 };
+
+export default withRouter(CourseFormGroup);
