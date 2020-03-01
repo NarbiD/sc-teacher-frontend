@@ -5,7 +5,7 @@ import Title from './title/title';
 
 const AvailableCourses = ({ items, onCreate }) => {
     return (
-        <div>
+        <div className="container">
             <Title />
             <CourseList items={ items } />
             <CreateCourse onCreate={ onCreate } />
