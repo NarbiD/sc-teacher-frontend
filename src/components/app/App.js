@@ -32,6 +32,18 @@ export default class App extends React.Component {
     this.setState({items: currentItems});
   };
 
+  removeItem(id) {
+    console.log(id);
+    this.setState((state) => {
+      const idx = state.items.findIndex((item) => item.id === id);
+      const items = [
+        ...state.items.slice(0, idx),
+        ...state.items.slice(idx + 1)
+      ];
+      return { items };
+    });
+  }
+
   createCourse() {
     return 
   }
@@ -47,7 +59,8 @@ export default class App extends React.Component {
           <Route path="/courses/"
                  render={ () => 
                   <AvailableCourses 
-                    items={this.state.items} 
+                    items={this.state.items}
+                    onRemove={ (item) => this.removeItem(item) } 
                   /> }
                  exact />
           <Route path="/create-course/"

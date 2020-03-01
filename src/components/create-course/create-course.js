@@ -4,7 +4,7 @@ import CourseFormGroup from '../course-form/course-input-from-group/course-form-
 import Title from '../create-course/title/title';
 
 const CreateCourse = ({ onCreate }) => {
-    return <div  className="container">
+    return <div className="container">
                 <Title />
                 <CourseFormGroup onSub={(item)=>onCreate(item)} />
            </div>

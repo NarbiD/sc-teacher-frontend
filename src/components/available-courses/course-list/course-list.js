@@ -4,12 +4,13 @@ import './course-list.css'
 
 import CourseListItem from '../course-item/course-list-item'
 
-const CourseList = ({ items }) => {
+const CourseList = ({ items, onRemove }) => {
     const courseItems = items.map((item) => {
         const { id, ...itemProps } = item;
         return (
             <li key={id} className="list-group-item">
-                <CourseListItem { ...itemProps } />
+                <CourseListItem items={itemProps}
+                                onRemove={()=>onRemove(id)} />
             </li>
         )
     });

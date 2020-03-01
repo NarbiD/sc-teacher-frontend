@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <nav className="header navbar navbar-expand-lg navbar-dark bg-dark">
       <Link to="/"
-            class="navbar-brand">
+            className="navbar-brand">
           Бот-викладач
       </Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,7 @@ const Header = () => {
         </li>
         <li className="nav-item">
           <Link to="/sign-up"
-                class="nav-link">
+                className="nav-link">
             Реєстрація
           </Link>
         </li>
