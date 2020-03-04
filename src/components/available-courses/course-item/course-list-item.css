@@ -16,7 +16,7 @@
     display: inline-block;
 }
 
-.course-list-item button {
-    width: 50px;
+.course-list-item .btn {
+    width: 40px;
     margin-right: 5px;
   }

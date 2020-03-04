@@ -1,22 +1,23 @@
 import React from 'react';
 
 import './course-list-item.css';
+import { Link } from 'react-router-dom';
 
-const CourseListItem = ({items, onRemove}) => {
-    const { label, comment, startDate, endDate } = items;
+const CourseListItem = ({ items, onRemove }) => {
+    const { id, label, comment, startDate, endDate } = items;
     return (
         <span className="course-list-item">        
             <div className="label">{label}</div>
             <div className="duration">({startDate} - {endDate})</div>
-            <button type="button"
+            <Link to={"/courses/"} 
                     className="btn btn-outline-danger btn-sm float-right"
-                    onClick={onRemove}>
+                    onClick={ onRemove }>
                 <span className="fa fa-trash-o"></span>
-            </button>
-            <button type="button"
+            </Link>
+            <Link to={`/edit-course/${id}`} 
                     className="btn btn-outline-warning btn-sm float-right">
                 <span className="fa fa-pencil-square-o"></span>
-            </button>
+            </Link>
             <div className="comment">{comment}</div>
         </span>
     );

@@ -6,11 +6,12 @@ import CourseListItem from '../course-item/course-list-item'
 
 const CourseList = ({ items, onRemove }) => {
     const courseItems = items.map((item) => {
-        const { id, ...itemProps } = item;
+        const { id } = item;
         return (
             <li key={id} className="list-group-item">
-                <CourseListItem items={itemProps}
-                                onRemove={()=>onRemove(id)} />
+                <CourseListItem items={item}
+                                onRemove={()=>onRemove(id)}
+                                />
             </li>
         )
     });

@@ -7,11 +7,21 @@ import {
 class CourseFormGroup extends Component{
 
     state = {
+        id: null,
         label: '',
         comment: '',
         startDate: '2020-01-01',
         endDate: '2020-01-01',
         active: false
+        }
+
+    componentDidMount() {
+        this.setState((state)=>{
+            if (this.props.formState) {
+                const newState = this.props.formState;
+                return newState;
+            }
+        });
     }
 
     onChange = (e) => {
@@ -25,7 +35,7 @@ class CourseFormGroup extends Component{
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.onSub(this.state);
+        this.props.onSubmit(this.state);
         this.props.history.push("/courses/");
     }
 
@@ -39,7 +49,8 @@ class CourseFormGroup extends Component{
                     name="label"
                     value={this.state.label}
                     onChange={this.onChange}
-                    placeholder="" />
+                    placeholder=""
+                    />
                 <small className="form-text text-muted">Публічна назва курсу, що буде відобраатись у переліку курсів викладача</small>
             </div>
             <div className="form-group">

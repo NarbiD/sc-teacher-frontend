@@ -6,7 +6,7 @@ import Title from '../create-course/title/title';
 const CreateCourse = ({ onCreate }) => {
     return <div className="container">
                 <Title />
-                <CourseFormGroup onSub={(item)=>onCreate(item)} />
+                <CourseFormGroup onSubmit={(item)=>onCreate(item)} />
            </div>
 }
 

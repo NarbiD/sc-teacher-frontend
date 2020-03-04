@@ -4,8 +4,10 @@ import './App.css';
 import AvailableCourses from '../available-courses/available-courses';
 import Header from '../header/header';
 
+import {createBrowserHistory} from "history"
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import CreateCourse from '../create-course/create-course';
+import EditCourse from '../edit-course/edit-course';
 
 export default class App extends React.Component {
 
@@ -33,7 +35,6 @@ export default class App extends React.Component {
   };
 
   removeItem(id) {
-    console.log(id);
     this.setState((state) => {
       const idx = state.items.findIndex((item) => item.id === id);
       const items = [
@@ -44,14 +45,26 @@ export default class App extends React.Component {
     });
   }
 
-  createCourse() {
-    return 
+  editItem = (item) => {
+    console.log(item);
+    this.setState((state) => {
+      const { id } = item;
+    const items = [
+        ...state.items.slice(0, id),
+        
+    ];
+    console.log("rrrrrrrrrrrrrrrrrrrrrr", items);
+    return items;
+    });
   }
+  
 
   render(){
+    const history = createBrowserHistory()
+
     return (
       <div className="App">
-        <Router>
+        <Router history={history}>
           <Header />
           <Route path="/"
                  render={ () => <h2>Welcome</h2> }
@@ -60,7 +73,7 @@ export default class App extends React.Component {
                  render={ () => 
                   <AvailableCourses 
                     items={this.state.items}
-                    onRemove={ (item) => this.removeItem(item) } 
+                    onRemove={ (item) => this.removeItem(item) }
                   /> }
                  exact />
           <Route path="/create-course/"
@@ -69,6 +82,16 @@ export default class App extends React.Component {
                     onCreate={ (item) => this.addItem(item) }
                   /> }
                   exact />
+          <Route path="/edit-course/:id"
+                 render={ ({ match }) => {
+                   const { id } = match.params;
+                  const oldItem = this.state.items[id-1];
+                  return <EditCourse onEdit={ this.editItem }
+                                     courseItem={ oldItem }
+                         />            
+                }}
+                  exact />
+                 
           <Route path="/sign-in/>"
                  render={ () => <h2>Авторизація викладача</h2> }
                  />

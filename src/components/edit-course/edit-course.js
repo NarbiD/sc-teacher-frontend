@@ -2,9 +2,9 @@ import React from 'react'
 
 import CourseFormGroup from '../course-form/course-input-from-group/course-form-group'
 
-const EditCourse = ({ courseItem, onSubmit }) => {
+const EditCourse = ({ courseItem, onEdit }) => {
     return <CourseFormGroup 
-                    onSubmit={ (item)=>onCreate(item) }
+                    onSubmit={ (item)=>onEdit(item) }
                     formState={ courseItem } />
 }
 
