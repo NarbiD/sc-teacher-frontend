@@ -10,9 +10,6 @@ const EditCourse = ({ courseItem, onEdit }) => {
                     onSubmit={ (item)=>onEdit(item) }
                     formState={ courseItem } />
            </div>
-    
-    
-    
 }
 
 export default EditCourse;
