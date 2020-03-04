@@ -10,12 +10,11 @@ const CourseList = ({ items, onRemove }) => {
         return (
             <li key={id} className="list-group-item">
                 <CourseListItem items={item}
-                                onRemove={()=>onRemove(id)}
-                                />
+                                onRemove={()=>onRemove(id)} />
             </li>
         )
     });
-    return (<ul className="list-group">{courseItems}</ul>)
+    return (<ul className="course-list list-group">{courseItems}</ul>)
 }
 
 export default CourseList;

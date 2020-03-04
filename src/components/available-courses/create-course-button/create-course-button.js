@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Link } from 'react-router-dom'
 
-import './create-course.css'
+import './create-course-button.css'
 
-const CreateCourse = () => {
+const CreateCourseButton = () => {
     return <Link to="/create-course/"
                 className="btn btn-outline-primary float-right create-course-button">
                     <span className="fa fa-plus"></span>
@@ -12,4 +12,4 @@ const CreateCourse = () => {
             </Link>
 }
 
-export default CreateCourse;
+export default CreateCourseButton;

@@ -18,8 +18,7 @@ class CourseFormGroup extends Component{
     componentDidMount() {
         this.setState((state)=>{
             if (this.props.formState) {
-                const newState = this.props.formState;
-                return newState;
+                return this.props.formState;
             }
         });
     }

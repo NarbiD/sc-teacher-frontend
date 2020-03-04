@@ -26,7 +26,7 @@ export default class App extends React.Component {
 
   addItem(newItem) {
     this.maxId++;
-    const entry = { id:this.maxId, ...newItem };
+    const entry = {...newItem, id:this.maxId };
     const currentItems = [
       ...this.state.items,
       entry
@@ -46,7 +46,6 @@ export default class App extends React.Component {
   }
 
   editItem = (item) => {
-    console.log(item);
     this.setState((state) => {
       const { id } = item;
     const items = [
@@ -54,10 +53,8 @@ export default class App extends React.Component {
         item,
         ...state.items.slice(id)
     ];
-    console.log("rrrrrrrrrrrrrrrrrrrrrr", items);
     return { items };
     });
-    console.log(this.state);
   }
   
 
@@ -87,7 +84,7 @@ export default class App extends React.Component {
           <Route path="/edit-course/:id"
                  render={ ({ match }) => {
                    const { id } = match.params;
-                  const oldItem = this.state.items[id-1];
+                  const oldItem = this.state.items[id-1]; // todo: fix indexing
                   return <EditCourse onEdit={ this.editItem }
                                      courseItem={ oldItem }
                          />            
