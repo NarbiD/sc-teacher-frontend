@@ -50,12 +50,14 @@ export default class App extends React.Component {
     this.setState((state) => {
       const { id } = item;
     const items = [
-        ...state.items.slice(0, id),
-        
+        ...state.items.slice(0, id-1),
+        item,
+        ...state.items.slice(id)
     ];
     console.log("rrrrrrrrrrrrrrrrrrrrrr", items);
-    return items;
+    return { items };
     });
+    console.log(this.state);
   }
   
 
