@@ -1,5 +1,7 @@
 .course-list-item .label {
     font-size: 1.2rem;
+    text-decoration: none;
+    color: black;
     cursor: pointer;
     display: inline-block;
 }

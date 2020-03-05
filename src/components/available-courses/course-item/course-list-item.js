@@ -7,7 +7,7 @@ const CourseListItem = ({ items, onRemove }) => {
     const { id, label, comment, startDate, endDate } = items;
     return (
         <span className="course-list-item">        
-            <div className="label">{label}</div>
+            <Link to={`/courses/${id}`} className="label">{label}</Link>
             <div className="duration">({startDate} - {endDate})</div>
             <Link to={"/courses/"} // todo: link to deleting page
                     className="btn btn-outline-danger btn-sm float-right"

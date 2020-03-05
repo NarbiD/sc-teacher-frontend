@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CreateCourse from '../create-course/create-course';
 import EditCourse from '../edit-course/edit-course';
 import PageTitle from '../page-title/page-title';
+import CoursePage from '../course-page/course-page';
 
 export default class App extends React.Component {
 
@@ -51,6 +52,10 @@ export default class App extends React.Component {
       ...items.slice(idx + 1)
     ]);
   }
+
+  getCourse = (id) => {
+    return this.state.items[id-1];
+  }
   
   render() {
     return (
@@ -64,14 +69,22 @@ export default class App extends React.Component {
             <Route path="/courses/"
                  render={ () =>
                   <AvailableCourses items={this.state.items}
-                                  onRemove={ (item) => this.removeItem(item) } /> } />
+                                  onRemove={ (item) => this.removeItem(item) } /> } 
+                                  exact />
+            <Route path="/courses/:id"
+                  render={ ({ match }) => {
+                      const { id } = match.params;
+                      const course = this.getCourse(id);
+                      return <CoursePage label={`Курс "${course.label}"`} />
+                    }
+                  } />
             <Route path="/create-course/"
                  render={ () => 
                  <CreateCourse onCreate={ (item) => this.addItem(item) } /> } />
             <Route path="/edit-course/:id"
                  render={ ({ match }) => {
                     const { id } = match.params;
-                    const oldItem = this.state.items[id-1]; // todo: fix indexing
+                    const oldItem = this.getCourse(id); // todo: fix indexing
                     return <EditCourse onEdit={ this.editItem }
                                        courseItem={ oldItem } />            
                  }} />
