@@ -4,10 +4,10 @@ import './App.css';
 import AvailableCourses from '../available-courses/available-courses';
 import Header from '../header/header';
 
-import {createBrowserHistory} from "history"
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CreateCourse from '../create-course/create-course';
 import EditCourse from '../edit-course/edit-course';
+import PageTitle from '../page-title/page-title';
 
 export default class App extends React.Component {
 
@@ -24,79 +24,62 @@ export default class App extends React.Component {
     ]
   }
 
-  addItem(newItem) {
-    this.maxId++;
-    const entry = {...newItem, id:this.maxId };
-    const currentItems = [
-      ...this.state.items,
-      entry
-    ];
-    this.setState({items: currentItems});
-  };
+  changeItems = (update) => 
+        this.setState((state) => ({ items: update(state.items) }));
 
-  removeItem(id) {
-    this.setState((state) => {
-      const idx = state.items.findIndex((item) => item.id === id);
-      const items = [
-        ...state.items.slice(0, idx),
-        ...state.items.slice(idx + 1)
-      ];
-      return { items };
-    });
+  findIndex = (id) => 
+        this.state.items.findIndex((item) => item.id === id);
+
+  addItem = (newItem) => {
+    const stateItem = { ...newItem, id:this.maxId++ };
+    this.changeItems((items) => [ ...items, stateItem ]);
   }
 
-  editItem = (item) => {
-    this.setState((state) => {
-      const { id } = item;
-    const items = [
-        ...state.items.slice(0, id-1),
-        item,
-        ...state.items.slice(id)
-    ];
-    return { items };
-    });
+  removeItem = (id) => {
+    const idx = this.findIndex(id);
+    this.changeItems((items) => [
+      ...items.slice(0, idx),
+      ...items.slice(idx + 1)
+    ]);
+  }
+
+  editItem = (editedItem) => {
+    const idx = this.findIndex(editedItem.id);
+    this.changeItems((items) => [
+      ...items.slice(0, idx),
+      editedItem,
+      ...items.slice(idx + 1)
+    ]);
   }
   
-
-  render(){
-    const history = createBrowserHistory()
-
+  render() {
     return (
       <div className="App">
-        <Router history={history}>
+        <Router>
           <Header />
-          <Route path="/"
-                 render={ () => <h2>Welcome</h2> }
+          <Switch>
+            <Route path="/"
+                 render={ () => <PageTitle text="Welcome!"/> } 
                  exact />
-          <Route path="/courses/"
+            <Route path="/courses/"
+                 render={ () =>
+                  <AvailableCourses items={this.state.items}
+                                  onRemove={ (item) => this.removeItem(item) } /> } />
+            <Route path="/create-course/"
                  render={ () => 
-                  <AvailableCourses 
-                    items={this.state.items}
-                    onRemove={ (item) => this.removeItem(item) }
-                  /> }
-                 exact />
-          <Route path="/create-course/"
-                 render={ () => 
-                  <CreateCourse
-                    onCreate={ (item) => this.addItem(item) }
-                  /> }
-                  exact />
-          <Route path="/edit-course/:id"
+                 <CreateCourse onCreate={ (item) => this.addItem(item) } /> } />
+            <Route path="/edit-course/:id"
                  render={ ({ match }) => {
-                   const { id } = match.params;
-                  const oldItem = this.state.items[id-1]; // todo: fix indexing
-                  return <EditCourse onEdit={ this.editItem }
-                                     courseItem={ oldItem }
-                         />            
-                }}
-                  exact />
-                 
-          <Route path="/sign-in/>"
-                 render={ () => <h2>Авторизація викладача</h2> }
-                 />
-          <Route path="/sign-in/>"
-                 render={ () => <h2>Реєстрація нового викладача</h2> }
-                 />
+                    const { id } = match.params;
+                    const oldItem = this.state.items[id-1]; // todo: fix indexing
+                    return <EditCourse onEdit={ this.editItem }
+                                       courseItem={ oldItem } />            
+                 }} />
+            <Route path="/sign-in"
+                 render={ () => <PageTitle text="Авторизація викладача" /> } />
+            <Route path="/sign-up"
+                 render={ () => <PageTitle text="Реєстрація нового викладача" /> } />
+          </Switch>
         </Router>
       </div>
     );

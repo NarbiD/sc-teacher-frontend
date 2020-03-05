@@ -14,7 +14,7 @@ const CourseList = ({ items, onRemove }) => {
             </li>
         )
     });
-    return (<ul className="course-list list-group">{courseItems}</ul>)
+    return (<ul className="course-list list-group">{ courseItems }</ul>)
 }
 
 export default CourseList;
