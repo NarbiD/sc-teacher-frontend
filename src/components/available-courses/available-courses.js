@@ -1,13 +1,13 @@
 import React from 'react';
-import CourseList from './course-list/course-list';
 import CreateCourse from './create-course-button/create-course-button';
 import PageTitle from '../page-title/page-title';
+import ItemList from '../item-list/item-list';
 
-const AvailableCourses = ({ items, onRemove, onEdit }) => {
+const AvailableCourses = ({ courses, onRemove, onEdit }) => {
     return (
         <div className="container">
             <PageTitle text="Доступні курси" />
-            <CourseList items={ items } 
+            <ItemList items={ courses } 
                         onRemove={ onRemove }
                         onEdit={ onEdit } />
             <CreateCourse />

@@ -15,7 +15,7 @@ export default class App extends React.Component {
   maxId = 100;
 
   state = {
-    items: [
+    courses: [
         {id: 1, label: 'Course1', comment: 'Comment for course 1',
         startDate: '2020-01-20', endDate: '2020-06-21'},
         {id: 2, label: 'Course2', comment: 'Comment for course 2',
@@ -25,36 +25,36 @@ export default class App extends React.Component {
     ]
   }
 
-  changeItems = (update) => 
-        this.setState((state) => ({ items: update(state.items) }));
+  changeCourses = (update) => 
+        this.setState((state) => ({ courses: update(state.courses) }));
 
   findIndex = (id) => 
-        this.state.items.findIndex((item) => item.id === id);
+        this.state.courses.findIndex((item) => item.id === id);
 
-  addItem = (newItem) => {
+  addCourse = (newItem) => {
     const stateItem = { ...newItem, id:this.maxId++ };
-    this.changeItems((items) => [ ...items, stateItem ]);
+    this.changeCourses((items) => [ ...items, stateItem ]);
   }
 
-  removeItem = (id) => {
+  removeCourse = (id) => {
     const idx = this.findIndex(id);
-    this.changeItems((items) => [
+    this.changeCourses((items) => [
       ...items.slice(0, idx),
       ...items.slice(idx + 1)
     ]);
   }
 
-  editItem = (editedItem) => {
-    const idx = this.findIndex(editedItem.id);
-    this.changeItems((items) => [
+  editCourse = (editedCourse) => {
+    const idx = this.findIndex(editedCourse.id);
+    this.changeCourses((items) => [
       ...items.slice(0, idx),
-      editedItem,
+      editedCourse,
       ...items.slice(idx + 1)
     ]);
   }
 
   getCourse = (id) => {
-    return this.state.items[id-1];
+    return this.state.courses[id-1];
   }
   
   render() {
@@ -68,8 +68,8 @@ export default class App extends React.Component {
                  exact />
             <Route path="/courses/"
                  render={ () =>
-                  <AvailableCourses items={this.state.items}
-                                  onRemove={ (item) => this.removeItem(item) } /> } 
+                  <AvailableCourses courses={this.state.courses}
+                                  onRemove={ (course) => this.removeItem(course) } /> } 
                                   exact />
             <Route path="/courses/:id"
                   render={ ({ match }) => {
@@ -80,13 +80,13 @@ export default class App extends React.Component {
                   } />
             <Route path="/create-course/"
                  render={ () => 
-                 <CreateCourse onCreate={ (item) => this.addItem(item) } /> } />
+                 <CreateCourse onCreate={ (course) => this.addCourse(course) } /> } />
             <Route path="/edit-course/:id"
                  render={ ({ match }) => {
                     const { id } = match.params;
                     const oldItem = this.getCourse(id); // todo: fix indexing
-                    return <EditCourse onEdit={ this.editItem }
-                                       courseItem={ oldItem } />            
+                    return <EditCourse onEdit={ this.editCourse }
+                                       course={ oldItem } />            
                  }} />
             <Route path="/sign-in"
                  render={ () => <PageTitle text="Авторизація викладача" /> } />

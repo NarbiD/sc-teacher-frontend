@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './course-list-item.css';
+import './item.css';
 import { Link } from 'react-router-dom';
 
-const CourseListItem = ({ items, onRemove }) => {
+const Item = ({ items, onRemove }) => {
     const { id, label, comment, startDate, endDate } = items;
     return (
         <span className="course-list-item">        
@@ -23,4 +23,4 @@ const CourseListItem = ({ items, onRemove }) => {
     );
 };
 
-export default CourseListItem;
+export default Item;

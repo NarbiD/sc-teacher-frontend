@@ -1,14 +1,14 @@
 import React from 'react'
-import CourseInputForm from '../course-input-form/course-input-form'
+import InputForm from './input-form';
 
-const CourseInputFromBlock = ({ label, comment }) => {
+const InputFormRow = ({ label, type, comment, value, onChange, name }) => {
     return (
     <div className="form-group">
         <label className="input-form-label">{label}</label>
-        <CourseInputForm />
+        <InputForm value={value} onChange={onChange} type={type} name={name}/>
         <small className="form-text text-muted">{comment}</small>
     </div>
     );
 };
 
-export default CourseInputFromBlock;
+export default InputFormRow;

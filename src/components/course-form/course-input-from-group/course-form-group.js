@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import {
 	withRouter
 } from 'react-router-dom';
+import InputFormRow from '../../form-elements/input-form-row';
+import CourseDuration from '../course-duration/course-duration/course-duration';
+import InputFormCheckbox from '../../form-elements/input-checkbox';
 
 class CourseFormGroup extends Component{
 
@@ -12,7 +15,7 @@ class CourseFormGroup extends Component{
         comment: '',
         startDate: '2020-01-01',
         endDate: '2020-01-01',
-        active: false
+        active: true
         }
 
     componentDidMount() {
@@ -25,11 +28,13 @@ class CourseFormGroup extends Component{
 
     onChange = (e) => {
         const { name, value, type, checked } = e.target;
-        if (type === 'checkbox') {
-            this.setState({ [name]: !checked });
-        } else {
-            this.setState({ [name]: value });
-        }
+        this.setState((state)=>{
+            if (type === 'checkbox') {
+                return { [name]: checked }
+            } else {
+                return { [name]: value };
+            }
+        });
     }
 
     onSubmit = (e) => {
@@ -41,56 +46,28 @@ class CourseFormGroup extends Component{
     render() {
         return (<form
         onSubmit={this.onSubmit}>
-            <div className="form-group">
-                <label className="input-form-label">Назва курсу</label>
-                <input type="text"
-                    className="form-control"
+            <InputFormRow label="Назва курсу"
+                    type="text"
                     name="label"
                     value={this.state.label}
                     onChange={this.onChange}
-                    placeholder=""
-                    />
-                <small className="form-text text-muted">Публічна назва курсу, що буде відобраатись у переліку курсів викладача</small>
-            </div>
-            <div className="form-group">
-                <label className="input-form-label">Коментар</label>
-                <input type="text"
-                    className="form-control"
+                    comment="Публічна назва курсу, що буде відобраатись у переліку курсів викладача" />
+            <InputFormRow label="Коментар"
+                    type="text"
                     name="comment"
                     value={this.state.comment}
                     onChange={this.onChange}
-                    placeholder="" />
-                <small className="form-text text-muted">Особистий коментар для курсу, відображається лише викладачу</small>
-            </div>
-            <div className="form-group">
-                <label>Початок курсу</label>
-                <input 
-                    className="form-control"
-                    name="startDate"
-                    value={this.state.startDate}
+                    comment="Особистий коментар для курсу, відображається лише викладачу" />
+            <CourseDuration label="Тривалість курсу"
+                    names={["startDate", "endDate"]}
+                    startDate={this.state.startDate}
+                    endDate={this.state.endDate}
                     onChange={this.onChange}
-                    type="date" />
-            </div>
-            <div className="form-group">
-                <label>Кінець курсу</label>
-                <input 
-                    className="form-control" 
-                    name="endDate"
-                    value={this.state.endDate}
-                    onChange={this.onChange}
-                    type="date" />
-            </div>
-            <div className="form-check">
-                <label className="form-check-label">
-                    <input 
-                    className="form-check-input"
+                    comment="Дати початку та закінчення курсу" />
+            <InputFormCheckbox label="Активний курс"
                     name="active"
                     value={this.state.active}
-                    onChange={this.onChange}
-                    type="checkbox" />
-                    <span> Активний курс</span>
-                </label>
-            </div>
+                    onChange={this.onChange} />
             <button 
                 type="submit" 
                 className="btn btn-outline-primary float-right" >
