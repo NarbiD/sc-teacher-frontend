@@ -70,7 +70,7 @@ class CourseFormGroup extends Component{
                     onChange={this.onChange} />
             <button 
                 type="submit" 
-                className="btn btn-outline-primary float-right" >
+                className="btn btn-outline-primary create-button float-right" >
                 <span className="fa fa-plus"></span>
                 <span> Зберігти</span>
             </button>

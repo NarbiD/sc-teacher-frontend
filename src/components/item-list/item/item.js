@@ -2,22 +2,17 @@ import React from 'react';
 
 import './item.css';
 import { Link } from 'react-router-dom';
+import DeleteButton from '../../buttons/delete-button';
+import EditButton from '../../buttons/edit-button';
 
-const Item = ({ items, onRemove }) => {
-    const { id, label, comment, startDate, endDate } = items;
+const Item = ({ item }) => {
+    const { id, label, comment, startDate, endDate } = item;
     return (
         <span className="course-list-item">        
             <Link to={`/courses/${id}`} className="label">{label}</Link>
             <div className="duration">({startDate} - {endDate})</div>
-            <Link to={"/courses/"} // todo: link to deleting page
-                    className="btn btn-outline-danger btn-sm float-right"
-                    onClick={ onRemove }>
-                <span className="fa fa-trash-o"></span>
-            </Link>
-            <Link to={`/edit-course/${id}`} 
-                    className="btn btn-outline-warning btn-sm float-right">
-                <span className="fa fa-pencil-square-o"></span>
-            </Link>
+            <DeleteButton link={`/courses/${id}/delete`} />
+            <EditButton link={`/courses/${id}/edit`}  />
             <div className="comment">{comment}</div>
         </span>
     );

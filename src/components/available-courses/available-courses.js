@@ -1,7 +1,7 @@
 import React from 'react';
-import CreateCourse from './create-course-button/create-course-button';
 import PageTitle from '../page-title/page-title';
 import ItemList from '../item-list/item-list';
+import CreateButton from '../create-button/create-button';
 
 const AvailableCourses = ({ courses, onRemove, onEdit }) => {
     return (
@@ -10,7 +10,8 @@ const AvailableCourses = ({ courses, onRemove, onEdit }) => {
             <ItemList items={ courses } 
                         onRemove={ onRemove }
                         onEdit={ onEdit } />
-            <CreateCourse />
+            <CreateButton label="Створити курс"
+                        link="/courses/add"/>
         </div>
     );
 }

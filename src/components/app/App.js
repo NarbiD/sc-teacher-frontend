@@ -28,8 +28,12 @@ export default class App extends React.Component {
   changeCourses = (update) => 
         this.setState((state) => ({ courses: update(state.courses) }));
 
-  findIndex = (id) => 
-        this.state.courses.findIndex((item) => item.id === id);
+  findIndex = (id) => {
+        console.log(this.state, id);
+        const r = this.state.courses.findIndex((item) => item.id === id);
+        console.log(r);
+        return r;
+  }
 
   addCourse = (newItem) => {
     const stateItem = { ...newItem, id:this.maxId++ };
@@ -37,6 +41,15 @@ export default class App extends React.Component {
   }
 
   removeCourse = (id) => {
+    const idx = this.findIndex(id);
+    this.changeCourses((items) => [
+      ...items.slice(0, idx),
+      
+      ...items.slice(idx + 1)
+    ]);
+  }
+
+  compliteDeletion = (id) => {
     const idx = this.findIndex(id);
     this.changeCourses((items) => [
       ...items.slice(0, idx),
@@ -69,25 +82,41 @@ export default class App extends React.Component {
             <Route path="/courses/"
                  render={ () =>
                   <AvailableCourses courses={this.state.courses}
-                                  onRemove={ (course) => this.removeItem(course) } /> } 
+                                  onRemove={ (course) => this.removeCourse(course) } /> } 
                                   exact />
+            <Route path="/courses/add"
+                 render={ () => 
+                 <CreateCourse onCreate={ (course) => this.addCourse(course) } /> } />
+            <Route path="/courses/:id/edit"
+                 render={ ({ match }) => {
+                    const { id } = match.params;
+                    const oldItem = this.getCourse(id); // todo: fix indexing
+                    return <EditCourse onEdit={ this.editCourse }
+                                       course={ oldItem } /> 
+                 }} />
             <Route path="/courses/:id"
                   render={ ({ match }) => {
                       const { id } = match.params;
                       const course = this.getCourse(id);
                       return <CoursePage label={`Курс "${course.label}"`} />
                     }
-                  } />
-            <Route path="/create-course/"
-                 render={ () => 
-                 <CreateCourse onCreate={ (course) => this.addCourse(course) } /> } />
-            <Route path="/edit-course/:id"
-                 render={ ({ match }) => {
+                  } 
+                  exact />
+            <Route path="/courses/:id/delete"
+                  render={ ({ match }) => {
                     const { id } = match.params;
-                    const oldItem = this.getCourse(id); // todo: fix indexing
-                    return <EditCourse onEdit={ this.editCourse }
-                                       course={ oldItem } />            
-                 }} />
+                    const items = this.state.courses;
+                    const idx = this.findIndex(Number(id));
+                    const oldItem = this.state.courses[idx];
+                    const item = {...oldItem, deleting:true}
+                    const stateWithDeleteConfirmationButton = 
+                        [...items.slice(0, idx),
+                        item,
+                        ...items.slice(idx + 1)]
+                    return <AvailableCourses courses={stateWithDeleteConfirmationButton}
+                                    onRemove={ (course) => this.removeCourse(course) } />}} 
+                                    exact />
+                  
             <Route path="/sign-in"
                  render={ () => <PageTitle text="Авторизація викладача" /> } />
             <Route path="/sign-up"

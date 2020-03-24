@@ -1,0 +1,11 @@
+.btn {
+    margin-right: 5px;
+}
+
+.btn.btn-icon {
+    width: 38px;
+}
+
+.btn .text-btn {
+    min-width: 50px; 
+}
