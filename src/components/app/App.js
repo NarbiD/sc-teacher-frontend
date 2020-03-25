@@ -4,7 +4,7 @@ import './App.css';
 import AvailableCourses from '../available-courses/available-courses';
 import Header from '../header/header';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import CreateCourse from '../create-course/create-course';
 import EditCourse from '../edit-course/edit-course';
 import PageTitle from '../page-title/page-title';
@@ -28,12 +28,8 @@ export default class App extends React.Component {
   changeCourses = (update) => 
         this.setState((state) => ({ courses: update(state.courses) }));
 
-  findIndex = (id) => {
-        console.log(this.state, id);
-        const r = this.state.courses.findIndex((item) => item.id === id);
-        console.log(r);
-        return r;
-  }
+  findIndex = (id) =>
+        this.state.courses.findIndex((item) => item.id === id);
 
   addCourse = (newItem) => {
     const stateItem = { ...newItem, id:this.maxId++ };
@@ -41,15 +37,6 @@ export default class App extends React.Component {
   }
 
   removeCourse = (id) => {
-    const idx = this.findIndex(id);
-    this.changeCourses((items) => [
-      ...items.slice(0, idx),
-      
-      ...items.slice(idx + 1)
-    ]);
-  }
-
-  compliteDeletion = (id) => {
     const idx = this.findIndex(id);
     this.changeCourses((items) => [
       ...items.slice(0, idx),
@@ -87,6 +74,14 @@ export default class App extends React.Component {
             <Route path="/courses/add"
                  render={ () => 
                  <CreateCourse onCreate={ (course) => this.addCourse(course) } /> } />
+            <Route path="/courses/:id/delete"
+                  render={({ match }) => {
+                    const { id } = match.params;
+                    this.removeCourse(Number(id)); // todo: fix changing state during render
+                    return <Redirect to="/courses/" />
+                  }} 
+                  exact >
+            </Route>
             <Route path="/courses/:id/edit"
                  render={ ({ match }) => {
                     const { id } = match.params;
@@ -102,7 +97,7 @@ export default class App extends React.Component {
                     }
                   } 
                   exact />
-            <Route path="/courses/:id/delete"
+            <Route path="/courses/:id/predelete"
                   render={ ({ match }) => {
                     const { id } = match.params;
                     const items = this.state.courses;
@@ -113,10 +108,10 @@ export default class App extends React.Component {
                         [...items.slice(0, idx),
                         item,
                         ...items.slice(idx + 1)]
-                    return <AvailableCourses courses={stateWithDeleteConfirmationButton}
-                                    onRemove={ (course) => this.removeCourse(course) } />}} 
-                                    exact />
-                  
+                    return <AvailableCourses 
+                            courses={stateWithDeleteConfirmationButton} />}} 
+                            exact />
+            
             <Route path="/sign-in"
                  render={ () => <PageTitle text="Авторизація викладача" /> } />
             <Route path="/sign-up"

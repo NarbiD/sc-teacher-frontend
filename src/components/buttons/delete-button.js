@@ -6,7 +6,7 @@ import './buttons.css';
 const DeleteButton = ({ link, onRemove }) => {
     return (
         <Link to={link}
-            className="btn btn-outline-danger btn-sm btn-icon float-right"
+            className="btn btn-outline-danger btn-sm btn-icon"
             onClick={ onRemove }>
             <span className="fa fa-trash-o"></span>
         </Link>
