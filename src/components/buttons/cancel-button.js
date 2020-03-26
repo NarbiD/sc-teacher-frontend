@@ -6,8 +6,8 @@ import './buttons.css';
 const CancelButton = ({ link }) => {
     return (
         <Link to={link}
-            className="btn btn-outline-secondary btn-sm btn-text">
-            <span>Скасувати</span>
+            className="btn btn-outline-secondary btn-sm btn-icon">
+            <span className="fa fa-undo"></span>
         </Link>
     );
 }

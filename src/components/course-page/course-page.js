@@ -23,7 +23,13 @@ export default class CoursePage extends Component {
             {id: 5, label: 'student5'}
         ]
     }
-
+    buttons1 = {
+        delete:true,
+        edit:true
+    }
+    buttons2 = {
+        message:true
+    }
     render() {
         return <div className="course-name container">
             <PageTitle text={ this.props.label} />
@@ -32,16 +38,20 @@ export default class CoursePage extends Component {
 
             <div className="row">
                 <div className="col-lg-8">
-                    <ItemList items={this.state.tasks}
-                        onRemove={()=>{}} />
+                    {<ItemList items={this.state.tasks}
+                        onRemove={()=>{}}
+                        buttons={this.buttons1}
+                        baseLink={`/courses/${this.props.id}/task/`} /> }
                     <CreateButton label="Створити завдання"
                         link={`/courses/${this.props.id}/tasks/add`} />
                     <CreateButton label="Створити розсилку"
                         link={`/courses/${this.props.id}/tasks/add`} />
                 </div>
                 <div className="col-lg-4">
-                    <ItemList items={this.state.students}
-                        onRemove={()=>{}} />
+                    {<ItemList items={this.state.students}
+                        onRemove={()=>{}} 
+                        buttons={this.buttons2}
+                        baseLink={`/courses/${this.props.id}/students/`}/> }
                     <CreateButton label="Додати студента"
                         link={`/courses/${this.props.id}/students/add`} />
                 </div>

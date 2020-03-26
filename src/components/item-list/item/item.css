@@ -1,4 +1,4 @@
-.course-list-item .label {
+.list-item .label {
     font-size: 1.2rem;
     text-decoration: none;
     color: black;
@@ -6,12 +6,12 @@
     display: inline-block;
 }
 
-.course-list-item .comment {
+.list-item .comment {
     font-size: 0.9rem;
     color: grey;
 }
 
-.course-list-item .duration {
+.list-item .duration {
     font-size: 0.9rem;
     color: grey;
     margin-left: 4px;

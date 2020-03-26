@@ -12,7 +12,7 @@ import CoursePage from '../course-page/course-page';
 
 export default class App extends React.Component {
 
-  maxId = 100;
+  maxId = 4;
 
   state = {
     courses: [
@@ -86,6 +86,7 @@ export default class App extends React.Component {
                  render={ ({ match }) => {
                     const { id } = match.params;
                     const oldItem = this.getCourse(id); // todo: fix indexing
+                    console.log(id);
                     return <EditCourse onEdit={ this.editCourse }
                                        course={ oldItem } /> 
                  }} />
@@ -93,7 +94,7 @@ export default class App extends React.Component {
                   render={ ({ match }) => {
                       const { id } = match.params;
                       const course = this.getCourse(id);
-                      return <CoursePage label={`Курс "${course.label}"`} />
+                      return <CoursePage label={`Курс "${course.label}"`} id={id} />
                     }
                   } 
                   exact />

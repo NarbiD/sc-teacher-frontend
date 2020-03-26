@@ -4,12 +4,18 @@ import ItemList from '../item-list/item-list';
 import CreateButton from '../create-button/create-button';
 
 const AvailableCourses = ({ courses, onRemove, onEdit }) => {
+    const buttons = {
+        delete: true,
+        edit: true
+    }
     return (
         <div className="container">
             <PageTitle text="Доступні курси" />
             <ItemList items={ courses } 
                         onRemove={ onRemove }
-                        onEdit={ onEdit } />
+                        buttons={buttons}
+                        onEdit={ onEdit } 
+                        baseLink={"/courses/"} />
             <CreateButton label="Створити курс"
                         link="/courses/add"/>
         </div>
