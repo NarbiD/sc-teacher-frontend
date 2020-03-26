@@ -11,17 +11,19 @@ import ButtonsGroup from '../buttons-group/buttons-group';
 const ItemList = ({ items, onRemove, buttons, baseLink }) => {
     const list = items.map((item) => {
         const { id, deleting } = item;
+        const link = `${baseLink}${id}/`;
         let itemComponent, buttonsGroup;
         if (deleting) {
-            buttonsGroup = <ButtonsGroup deleteLink={`${baseLink}${id}/delete`}
+            buttonsGroup = <ButtonsGroup deleteLink={`${link}/delete`}
                                     cancelLink={baseLink} />
             itemComponent = (<DeletingItem item={item} buttons={buttonsGroup} onRemove={()=>onRemove(id)} />)
-        } else {
-            buttonsGroup = <ButtonsGroup deleteLink={ buttons.delete ? `${baseLink}${id}/predelete` : undefined }
-                          editLink={ buttons.edit ? `${baseLink}${id}/edit` : undefined }
-                          messageLink={ buttons.message ? `${baseLink}${id}/message` : undefined } />
-            const link = `${baseLink}${id}/`;
+        } else if (buttons){
+            buttonsGroup = <ButtonsGroup deleteLink={ buttons.delete ? `${link}/predelete` : undefined }
+                          editLink={ buttons.edit ? `${link}/edit` : undefined }
+                          messageLink={ buttons.message ? `${link}/message` : undefined } />
             itemComponent = (<Item item={item} buttons={buttonsGroup} link={link} />)
+        } else {
+            itemComponent = (<Item item={item} link={link} />)
         }
         return (
             <li key={id} className="list-group-item">

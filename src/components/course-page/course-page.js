@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PageTitle from '../page-title/page-title';
 import ItemList from '../item-list/item-list';
 import CreateButton from '../create-button/create-button';
+import Menu from './menu/menu';
 
 export default class CoursePage extends Component {
     state = {
@@ -38,14 +39,15 @@ export default class CoursePage extends Component {
 
             <div className="row">
                 <div className="col-lg-8">
-                    {<ItemList items={this.state.tasks}
+                    {/* {<ItemList items={this.state.tasks}
                         onRemove={()=>{}}
                         buttons={this.buttons1}
                         baseLink={`/courses/${this.props.id}/task/`} /> }
                     <CreateButton label="Створити завдання"
                         link={`/courses/${this.props.id}/tasks/add`} />
                     <CreateButton label="Створити розсилку"
-                        link={`/courses/${this.props.id}/tasks/add`} />
+                        link={`/courses/${this.props.id}/tasks/add`} /> */}
+                    <Menu courseId={ this.props.id } />
                 </div>
                 <div className="col-lg-4">
                     {<ItemList items={this.state.students}
