@@ -9,9 +9,10 @@ import './item-list.css'
 import ButtonsGroup from '../buttons-group/buttons-group';
 
 const ItemList = ({ items, onRemove, buttons, baseLink }) => {
+    console.log(items);
     const list = items.map((item) => {
         const { id, deleting } = item;
-        const link = `${baseLink}${id}/`;
+        const link = `${baseLink}${id}`;
         let itemComponent, buttonsGroup;
         if (deleting) {
             buttonsGroup = <ButtonsGroup deleteLink={`${link}/delete`}

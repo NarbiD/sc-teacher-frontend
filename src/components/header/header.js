@@ -1,37 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 import './header.css';
 
 const Header = () => {
 
-  const LinkInHeader = ({ link, text }) =>
-             <li className="nav-item">
-                <Link to={ link }
-                      className="nav-link">
-                  { text }
-                </Link>
-             </li>
 
   return (
-    <nav className="header navbar navbar-expand-lg navbar-dark bg-dark">
-      <Link to="/" className="navbar-brand">
-          Бот-викладач
-      </Link>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <LinkInHeader link="/courses/"
-                        text="Доступні курси" />
-          <LinkInHeader link="/sign-in"
-                        text="Вхід" />
-          <LinkInHeader link="/sign-up"
-                        text="Реєстрація" />
-        </ul>
-      </div>
-    </nav>
+      <Navbar className="navbar" bg="dark" expand="lg">
+            <Navbar.Brand className="nav-link" href="/">
+              <span className="link-text">Бот-викладач</span>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link className="nav-link" href="/courses/">
+                  <span className="link-text">Доступні курси</span>
+                </Nav.Link>
+                <Nav.Link className="nav-link" href="/sign/in">
+                  <span className="link-text">Вхід</span>
+                </Nav.Link>
+                <Nav.Link className="nav-link" href="/sign-up">
+                  <span className="link-text">Реєстрація</span>
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+  </Navbar>
   );
 };
 

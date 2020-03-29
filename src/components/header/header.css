@@ -1,14 +1,21 @@
-.header ul li {
+.nav-link  {
     list-style: none;
     margin: 0;
     padding: .5rem 1rem;
     border-radius: 3px;
-  }
-
-.header ul li:hover {
-    background-color: rgb(224, 160, 32);
+    color: rgb(240, 210, 240);
+}
+.nav-link:hover {
+    background-color: rgb(100, 85, 100);
+}
+.navbar {
+  margin-bottom: 20px;
 }
 
-.header {
-  margin-bottom: 20px;
+.link-text {
+  color: rgb(220, 210, 220);
+}
+
+.link-text:hover {
+  color: rgb(190, 170, 190);
 }

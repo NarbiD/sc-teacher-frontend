@@ -1,11 +1,9 @@
-.btn {
-    margin-right: 5px;
-}
-
 .btn.btn-icon {
+    margin-right: 5px;
     width: 38px;
 }
 
-.btn .text-btn {
-    min-width: 50px; 
+.btn.menu-btn {
+    min-width: 120px;
+    margin:0px;
 }

@@ -1,13 +1,15 @@
 import React from 'react';
 
-import ItemList from '../../item-list/item-list';
+import MenuButton from '../../buttons/menu-button';
 
 const Menu = ({ courseId }) => {
-    const menu = [{id:"tasks", label:'Завдання'},
-                {id:"mailing", label:"Розсилки"},
-                {id:"content", label:"Матеріали"},
-                {id:"teachers", label:"Додаткові викладачі"}];
-        return <ItemList items={menu} baseLink={`/courses/${courseId}/`} />
+    const baseLink=`/courses/${courseId}/`;
+        return (<div className="btn-group mb-1" role="toolbar">
+                <MenuButton label="Завдання" link={`${baseLink}tasks`} />
+                <MenuButton label="Розсилки" link={`${baseLink}mailing`} />
+                <MenuButton label="Матеріали" link={`${baseLink}materials`} />
+                <MenuButton label="Викладачі" link={`${baseLink}teachers`} />
+                </div>);
 }
 
 export default Menu;
