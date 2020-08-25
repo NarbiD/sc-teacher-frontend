@@ -25,11 +25,17 @@ class SignInForm extends Component{
 
     onSubmit = (e) => {
         e.preventDefault();
-        postData("/signIn", this.state);
+        postData("/signIn", this.state)
+            .then(response => this.setToken(response.json()));
         // this.props.onSubmit(this.state);
         this.props.history.push("/courses/");
     }
 
+    setToken(tokenContainer) {
+        if (tokenContainer.value != null) {
+            document.cookie = "Auth-Token=" + tokenContainer.value;
+        }
+    }
     render() {
         return (<form
             onSubmit={this.onSubmit}>
@@ -55,18 +61,6 @@ class SignInForm extends Component{
             </button>
         </form>)
     };
-}
-
-async function postData(url = '', data = {}) {
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-    });
-    let tokenContainer =  await response.json();
-    if (tokenContainer.value != null) {
-        document.cookie = "Auth-Token=" + tokenContainer.value;
-    }
 }
 
 export default withRouter(SignInForm);
