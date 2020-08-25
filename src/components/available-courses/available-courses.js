@@ -11,7 +11,7 @@ const AvailableCourses = ({ courses, onRemove, onEdit }) => {
     return (
         <div className="container">
             <PageTitle text="Доступні курси" />
-            <ItemList items={ courses } 
+            <ItemList items={ courses }
                         onRemove={ onRemove }
                         buttons={buttons}
                         onEdit={ onEdit } 

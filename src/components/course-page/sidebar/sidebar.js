@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StudentList from './student-list/student-list';
 import SearchPanel from '../../search-panel/search-panel';
+import CreateButton from '../../create-button/create-button';
 
 export default class Sidebar extends Component {
     state = { search:'' }
@@ -23,9 +24,12 @@ export default class Sidebar extends Component {
         const { search } = this.state;
         const visibleStudents = this.searchItems(this.props.students, search);
         return <div className="right-bar">
-            <SearchPanel onSearchChange={this.onSearchChange} />
+            <SearchPanel onSearchChange={this.onSearchChange}
+                        placeholder="Почніть вводити ПІБ студента" />
             <StudentList students={visibleStudents}
                          courseId={this.props.courseId} />
+            <CreateButton label="Додати студента"
+                        link={`/courses/${this.props.courseId}/students/add`} />
         </div>
     }
 

@@ -7,7 +7,7 @@ const MessageButton = ({ link }) => {
     return (
         <Link to={link}
             className="btn btn-outline-info btn-sm btn-icon">
-            <span className="fa fa-envelope-o"></span>
+                <i className="far fa-envelope"></i>
         </Link>);
 }
 

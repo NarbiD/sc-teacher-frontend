@@ -1,0 +1,15 @@
+.teacher-item {
+    font-size: 0.9rem;
+    color: grey;
+    line-height: 60%;
+}
+
+.teacher-item .name {
+    font-size: 0.9rem;
+    color: black;
+    line-height: 110%;
+}
+
+.teacher-item img {
+    border-radius: 3px;
+}

@@ -19,13 +19,13 @@ export default class SearchPanel extends Component {
 
   render() {
     return (
-      <div className="input-group input-group-sm mb-1">
+      <div className="search-panel input-group input-group-sm mb-1">
           <div className="input-group-prepend">
             <span className="input-group-text">Пошук</span>
           </div>
           <input type="text" 
                  className="form-control search-input"
-                 placeholder="Почніть вводити ПІБ студента"
+                 placeholder={this.props.placeholder?this.props.placeholder:""}
                  value={this.state.term}
                  onChange={ this.onTermChange } />
       </div>

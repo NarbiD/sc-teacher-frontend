@@ -1,9 +1,21 @@
 .btn.btn-icon {
-    margin-right: 5px;
-    width: 38px;
+    margin-right: 3px;
+    width: 32px;
+}
+.btn.btn-icon:last-child {
+    margin-right: 0px;
 }
 
 .btn.menu-btn {
     min-width: 120px;
     margin:0px;
+}
+
+.btn.send-btn, .attachment  {
+    width: 40px;
+}
+
+.btn.btn-label {
+    width: 160px;
+    margin-bottom: 3px;
 }

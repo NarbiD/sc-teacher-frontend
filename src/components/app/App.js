@@ -9,6 +9,11 @@ import CreateCourse from '../create-course/create-course';
 import EditCourse from '../edit-course/edit-course';
 import PageTitle from '../page-title/page-title';
 import CoursePage from '../course-page/course-page';
+import Home from '../home/home'
+import Footer from '../footer/footer';
+import SingUp from "../sign-up/sign-up";
+import SignInForm from "../sign-in-form/sign-in-form";
+import SingIn from "../sign-in/sign-in";
 
 export default class App extends React.Component {
 
@@ -16,11 +21,11 @@ export default class App extends React.Component {
 
   state = {
     courses: [
-        {id: 1, label: 'Course1', comment: 'Comment for course 1',
-        startDate: '2020-01-20', endDate: '2020-06-21'},
-        {id: 2, label: 'Course2', comment: 'Comment for course 2',
-        startDate: '2020-01-21', endDate: '2020-06-23'},
-        {id: 3, label: 'Course3', comment: 'Comment for course 3',
+        {id: 1, label: 'Корпоративні системи', comment: 'Групи БІ-1, СМПР-2',
+        startDate: '2020-01-20', endDate: '2020-04-21'},
+        {id: 2, label: 'Методи та технології для розподілених систем', comment: 'Група БІ-2',
+        startDate: '2020-01-21', endDate: '2020-04-23'},
+        {id: 3, label: 'Інформатизація проектного бізнес-менеджменту', comment: 'Група БІ-2',
         startDate: '2020-01-28', endDate: '2020-06-24'}
     ]
   }
@@ -64,7 +69,7 @@ export default class App extends React.Component {
           <Header />
           <Switch>
             <Route path="/"
-                 render={ () => <PageTitle text="Welcome!"/> } 
+                 render={ () => <Home /> } 
                  exact />
             <Route path="/courses/"
                  render={ () =>
@@ -90,6 +95,25 @@ export default class App extends React.Component {
                     return <EditCourse onEdit={ this.editCourse }
                                        course={ oldItem } /> 
                  }} />
+            <Route path="/courses/:course_id/students/:student_id/message"
+                  render={ ({ match }) => {
+                      const { course_id, student_id } = match.params;
+                      const course = this.getCourse(course_id);
+                      return <CoursePage label={`Курс "${course.label}"`} 
+                                        id={course_id} tabState="dialog" 
+                                        student={student_id} />
+                    }
+                  } 
+                  exact />
+            <Route path="/courses/:course_id/students/:student_id"
+                 render={ ({ match }) => {
+                  const { course_id, student_id } = match.params;
+                  const course = this.getCourse(course_id);
+                  return <CoursePage label={`Курс "${course.label}"`} 
+                                    id={course_id} tabState="resume" 
+                                    student={student_id } 
+                                    courses={this.state.courses} />
+                } } />
             <Route path="/courses/:id"
                   render={ ({ match }) => {
                       const { id } = match.params;
@@ -112,13 +136,15 @@ export default class App extends React.Component {
                     return <AvailableCourses 
                             courses={stateWithDeleteConfirmationButton} />}} 
                             exact />
-            
-            <Route path="/sign-in"
-                 render={ () => <PageTitle text="Авторизація викладача" /> } />
-            <Route path="/sign-up"
-                 render={ () => <PageTitle text="Реєстрація нового викладача" /> } />
+            <Route path="/courses/:id/tasks"
+                 render={ () => <CoursePage  /> } />
+            <Route path="/signin"
+                 render={ () => <SingIn /> } />
+            <Route path="/signup"
+                 render={ () => <SingUp /> } />
           </Switch>
         </Router>
+        <Footer />
       </div>
     );
   } 

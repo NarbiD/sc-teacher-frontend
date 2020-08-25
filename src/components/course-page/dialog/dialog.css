@@ -1,0 +1,14 @@
+.dialog-input-field .btn {
+    margin-left: 4px;
+}
+
+.message-filter .btn.menu-btn {
+    min-width: 95px;
+}
+
+.search {
+    width:330px;
+}
+
+/* .dialog-history {
+} */

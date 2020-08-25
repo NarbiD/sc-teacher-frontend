@@ -9,20 +9,20 @@ const Header = () => {
 
   return (
       <Navbar className="navbar" bg="dark" expand="lg">
-            <Navbar.Brand className="nav-link" href="/">
-              <span className="link-text">Бот-викладач</span>
+            <Navbar.Brand className="nav-link brand mb-1" href="/">
+              <b className="link-text">Студентоцентрований онлайн аудиторіум</b>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Nav.Link className="nav-link" href="/courses/">
-                  <span className="link-text">Доступні курси</span>
+              <Nav className="ml-auto">
+                <Nav.Link className="nav-link" href="/courses">
+                  <span className="link-text navbar-right">Доступні курси</span>
                 </Nav.Link>
-                <Nav.Link className="nav-link" href="/sign/in">
-                  <span className="link-text">Вхід</span>
+                <Nav.Link className="nav-link" href="/signin">
+                  <span className="link-text navbar-right">|</span>
                 </Nav.Link>
-                <Nav.Link className="nav-link" href="/sign-up">
-                  <span className="link-text">Реєстрація</span>
+                <Nav.Link className="nav-link float-right" href="/signup">
+                  <span className="link-text navbar-right">Заславський В.А.</span>
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>

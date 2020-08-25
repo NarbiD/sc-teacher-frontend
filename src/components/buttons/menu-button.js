@@ -1,16 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import './buttons.css';
 
-const MenuButton = ({ link, label }) => {
+const MenuButton = ({ label, onClick }) => {
     return (
-        <Link to={link}
-            className="btn btn-secondary btn-group btn-sm menu-btn"
+        <button
+            className="btn btn-secondary btn-group btn-sm menu-btn text-center"
             role="group"
-            type="button">
+            type="button"
+            onClick={onClick}>
             <span>{label}</span>
-        </Link>);
+        </button>);
 }
 
 export default MenuButton;
