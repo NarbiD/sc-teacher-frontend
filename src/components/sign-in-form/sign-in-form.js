@@ -37,14 +37,12 @@ class SignInForm extends Component{
                           type="text"
                           name="login"
                           value={this.state.comment}
-                          onChange={this.onChange}
-                          comment="Особистий коментар для курсу, відображається лише викладачу" />
+                          onChange={this.onChange} />
             <InputFormRow label="Пароль"
                           type="password"
                           name="password"
                           value={this.state.comment}
-                          onChange={this.onChange}
-                          comment="Особистий коментар для курсу, відображається лише викладачу" />
+                          onChange={this.onChange} />
             <InputFormCheckbox label="Запам'ятати мене"
                                name="rememberMe"
                                value={this.state.rememberMe}

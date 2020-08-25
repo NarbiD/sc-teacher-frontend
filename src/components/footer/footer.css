@@ -1,4 +1,6 @@
 .footer {
     font-size: 0.9rem;
     color: rgb(92, 92, 92);
+    position: absolute;
+    bottom: 10px;
 }
