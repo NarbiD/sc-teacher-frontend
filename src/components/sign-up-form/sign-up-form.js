@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import InputFormRow from '../form-elements/input-form-row';
 import InputFormCheckbox from '../form-elements/input-checkbox';
 
+import ApiService from "../api-service/api-service";
+
 class SignUpForm extends Component{
 
     state = {
@@ -29,9 +31,8 @@ class SignUpForm extends Component{
 
     onSubmit = (e) => {
         e.preventDefault();
-        postData("/signUp", this.state);
-        // this.props.onSubmit(this.state);
-        this.props.history.push("/courses/");
+        ApiService.signUp(this.state);
+        this.props.history.push("/");
     }
 
     render() {
@@ -79,15 +80,6 @@ class SignUpForm extends Component{
             </button>
         </form>)
     };
-}
-
-async function postData(url = '', data = {}) {
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-    });
-    return await response.json();
 }
 
 export default withRouter(SignUpForm);

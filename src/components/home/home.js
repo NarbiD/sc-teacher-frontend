@@ -6,7 +6,7 @@ const Home = () => {
         <div className="container">
           <h1 className="home-title">Студентоцентрований онлайн аудиторіум</h1>
           <p>Навчайте студентів, спілкуйтесь зі ними дистанційно та автоматизуйте освіту за вашою програмою! </p>
-          <p><a className="btn btn-info btn-lg" href="/" role="button">Реєстрація викладача »</a></p>
+          <p><a className="btn btn-info btn-lg" href="/signup" role="button">Реєстрація викладача »</a></p>
         </div>
       </div> 
       <div className="container">

@@ -14,6 +14,7 @@ import Footer from '../footer/footer';
 import SingUp from "../sign-up/sign-up";
 import SignInForm from "../sign-in-form/sign-in-form";
 import SingIn from "../sign-in/sign-in";
+import ApiService from "../api-service/api-service";
 
 export default class App extends React.Component {
 
@@ -21,11 +22,11 @@ export default class App extends React.Component {
 
   state = {
     courses: [
-        {id: 1, label: 'Корпоративні системи', comment: 'Групи БІ-1, СМПР-2',
+        {id: 11, label: 'Корпоративні системи', comment: 'Групи БІ-1, СМПР-2',
         startDate: '2020-01-20', endDate: '2020-04-21'},
-        {id: 2, label: 'Методи та технології для розподілених систем', comment: 'Група БІ-2',
+        {id: 12, label: 'Методи та технології для розподілених систем', comment: 'Група БІ-2',
         startDate: '2020-01-21', endDate: '2020-04-23'},
-        {id: 3, label: 'Інформатизація проектного бізнес-менеджменту', comment: 'Група БІ-2',
+        {id: 13, label: 'Інформатизація проектного бізнес-менеджменту', comment: 'Група БІ-2',
         startDate: '2020-01-28', endDate: '2020-06-24'}
     ]
   }
@@ -142,6 +143,11 @@ export default class App extends React.Component {
                  render={ () => <SingIn /> } />
             <Route path="/signup"
                  render={ () => <SingUp /> } />
+            <Route path="/signout"
+                 render={ () => {
+                         ApiService.signOut();
+                         return <Redirect to="/"/>
+                     }} />
           </Switch>
         </Router>
         <Footer />

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
 import { withRouter } from 'react-router-dom';
-import InputFormRow from '../form-elements/input-form-row';
-import InputFormCheckbox from "../form-elements/input-checkbox";
+import ApiService from "../api-service/api-service";
+
+import './sign-in-form.css';
+import InputForm from "../form-elements/input-form";
 
 class SignInForm extends Component{
 
@@ -25,39 +27,31 @@ class SignInForm extends Component{
 
     onSubmit = (e) => {
         e.preventDefault();
-        postData("/signIn", this.state)
-            .then(response => this.setToken(response.json()));
-        // this.props.onSubmit(this.state);
-        this.props.history.push("/courses/");
+        ApiService.signIn(this.state);
+        this.props.hideForm(true);
+        this.props.history.push("/");
     }
 
-    setToken(tokenContainer) {
-        if (tokenContainer.value != null) {
-            document.cookie = "Auth-Token=" + tokenContainer.value;
-        }
-    }
     render() {
         return (<form
-            onSubmit={this.onSubmit}>
-            <InputFormRow label="Логін"
-                          type="text"
+            onSubmit={this.onSubmit}
+            className="form-row">
+            <span className="form-group col-md-5">
+                <InputForm type="text"
                           name="login"
-                          value={this.state.comment}
-                          onChange={this.onChange} />
-            <InputFormRow label="Пароль"
-                          type="password"
+                          onChange={this.onChange}
+                                             placeholder={"Логін"} />
+            </span>
+            <span className="form-group col-md-5">
+                <InputForm type="password"
                           name="password"
-                          value={this.state.comment}
-                          onChange={this.onChange} />
-            <InputFormCheckbox label="Запам'ятати мене"
-                               name="rememberMe"
-                               value={this.state.rememberMe}
-                               onChange={this.onChange} />
+                          onChange={this.onChange}
+                          placeholder={"Пароль"} />
+            </span>
             <button
                 type="submit"
-                className="btn btn-outline-primary create-button float-right" >
-                <span className="fa fa-plus"/>
-                <span> Зберігти</span>
+                className="btn btn-info btn-sm sign-in-btn float-right form-group col-md-1" >
+                <span className="fas fa-sign-in-alt"/>
             </button>
         </form>)
     };
