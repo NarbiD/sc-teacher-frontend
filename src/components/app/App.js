@@ -18,49 +18,36 @@ import ApiService from "../api-service/api-service";
 
 export default class App extends React.Component {
 
-  maxId = 4;
-
-  state = {
-    courses: [
-        {id: 11, label: 'Корпоративні системи', comment: 'Групи БІ-1, СМПР-2',
-        startDate: '2020-01-20', endDate: '2020-04-21'},
-        {id: 12, label: 'Методи та технології для розподілених систем', comment: 'Група БІ-2',
-        startDate: '2020-01-21', endDate: '2020-04-23'},
-        {id: 13, label: 'Інформатизація проектного бізнес-менеджменту', comment: 'Група БІ-2',
-        startDate: '2020-01-28', endDate: '2020-06-24'}
-    ]
-  }
-
-  changeCourses = (update) => 
+  changeCourses = (update) =>
         this.setState((state) => ({ courses: update(state.courses) }));
 
   findIndex = (id) =>
         this.state.courses.findIndex((item) => item.id === id);
 
   addCourse = (newItem) => {
-    const stateItem = { ...newItem, id:this.maxId++ };
-    this.changeCourses((items) => [ ...items, stateItem ]);
+    // const stateItem = { ...newItem, id:this.maxId++ };
+    // this.changeCourses((items) => [ ...items, stateItem ]);
   }
 
   removeCourse = (id) => {
-    const idx = this.findIndex(id);
-    this.changeCourses((items) => [
-      ...items.slice(0, idx),
-      ...items.slice(idx + 1)
-    ]);
+    // const idx = this.findIndex(id);
+    // this.changeCourses((items) => [
+    //   ...items.slice(0, idx),
+    //   ...items.slice(idx + 1)
+    // ]);
   }
 
   editCourse = (editedCourse) => {
-    const idx = this.findIndex(editedCourse.id);
-    this.changeCourses((items) => [
-      ...items.slice(0, idx),
-      editedCourse,
-      ...items.slice(idx + 1)
-    ]);
+    // const idx = this.findIndex(editedCourse.id);
+    // this.changeCourses((items) => [
+    //   ...items.slice(0, idx),
+    //   editedCourse,
+    //   ...items.slice(idx + 1)
+    // ]);
   }
 
   getCourse = (id) => {
-    return this.state.courses[id-1];
+    // return this.state.courses[id-1];
   }
   
   render() {
@@ -74,7 +61,7 @@ export default class App extends React.Component {
                  exact />
             <Route path="/courses/"
                  render={ () =>
-                  <AvailableCourses courses={this.state.courses}
+                  <AvailableCourses
                                   onRemove={ (course) => this.removeCourse(course) } /> } 
                                   exact />
             <Route path="/courses/add"
@@ -92,7 +79,6 @@ export default class App extends React.Component {
                  render={ ({ match }) => {
                     const { id } = match.params;
                     const oldItem = this.getCourse(id); // todo: fix indexing
-                    console.log(id);
                     return <EditCourse onEdit={ this.editCourse }
                                        course={ oldItem } /> 
                  }} />

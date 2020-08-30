@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Cookies} from 'react-cookie';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 

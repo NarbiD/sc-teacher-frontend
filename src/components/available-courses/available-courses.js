@@ -1,33 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PageTitle from '../page-title/page-title';
 import ItemList from '../item-list/item-list';
 import CreateButton from '../create-button/create-button';
 import ApiService from "../api-service/api-service";
 
-const AvailableCourses = ({ courses, onRemove, onEdit }) => {
-    const buttons = {
+export default class AvailableCourses extends Component{
+
+    state = {
+        courses: []
+    }
+
+    buttons = {
         delete: true,
         edit: true
     }
-    // let newc = ApiService.getAllCourses();
-    // console.log(newc);
-    // newc = newc.map(n=>n.label=n.title);
-    // console.log(newc);
-    // newc = { ...courses, newc };
-    // console.log(newc);
 
-    return (
-        <div className="container">
-            <PageTitle text="Доступні курси" />
-            <ItemList items={ newc }
-                        onRemove={ onRemove }
-                        buttons={buttons}
-                        onEdit={ onEdit } 
-                        baseLink={"/courses/"} />
-            <CreateButton label="Створити курс"
-                        link="/courses/add"/>
-        </div>
-    );
+    setCourses = (courses) => {
+        this.setState({courses: courses});
+    }
+
+    componentDidMount() {
+        ApiService.updateCourses(this.setCourses);
+    }
+
+    render = () => {
+        if(this.state.courses==={}) {return ""} else {console.log(this.state.courses);}
+        return (
+            <div className="container">
+                <PageTitle text="Доступні курси" />
+                <ItemList items={ this.state.courses }
+                            onRemove={ this.props.onRemove }
+                            buttons={this.buttons}
+                            onEdit={ this.props.onEdit }
+                            baseLink={"/courses/"} />
+                <CreateButton label="Створити курс"
+                            link="/courses/add"/>
+            </div>
+        );
+    }
 }
-
-export default AvailableCourses;

@@ -36,18 +36,8 @@ export default class ApiService {
         document.cookie = name + "=;'max-age': -1";
     }
 
-    static getResource = async (url) => {
-        const res = await fetch(`${this._apiBase}${url}`);
-
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, received ${res.status}`)
-        }
-        return await res.json();
-    };
-
-    static getAllCourses = async () => {
-        const res = await this.getResource(`${this._apiBase}/courses/`);
-        console.log(res.json());
-        return res.json();
-    };
+    static updateCourses(setCourses) {
+        RequestTemplates.getData(this._apiBase + "/courses")
+            .then(courses=>setCourses(courses));
+    }
 }
