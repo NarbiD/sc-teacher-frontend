@@ -40,4 +40,22 @@ export default class ApiService {
         RequestTemplates.getData(this._apiBase + "/courses")
             .then(courses=>setCourses(courses));
     }
+
+    static editCourse(course, editAppState) {
+        RequestTemplates.putData(this._apiBase + "/courses/" + course.id, course)
+            .then(()=>editAppState(course));
+    }
+
+    static removeCourse(id, editAppState) {
+        RequestTemplates.deleteData(this._apiBase + "/courses/" + id)
+            .then(editAppState);
+    }
+
+    static addCourse(course, editAppState) {
+        RequestTemplates.postData(this._apiBase + "/courses/", course)
+            .then(resp=>{
+                course.id = resp.value;
+                editAppState(course)
+            });
+    }
 }

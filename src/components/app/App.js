@@ -15,41 +15,50 @@ import SingUp from "../sign-up/sign-up";
 import SignInForm from "../sign-in-form/sign-in-form";
 import SingIn from "../sign-in/sign-in";
 import ApiService from "../api-service/api-service";
+import RequestTemplates from "../api-service/request-templates";
+
+
 
 export default class App extends React.Component {
 
-  changeCourses = (update) =>
-        this.setState((state) => ({ courses: update(state.courses) }));
+    state = {
+        courses: []
+    }
 
-  findIndex = (id) =>
-        this.state.courses.findIndex((item) => item.id === id);
+   setCourses = (courses) => this.setState({courses: courses});
 
-  addCourse = (newItem) => {
-    // const stateItem = { ...newItem, id:this.maxId++ };
-    // this.changeCourses((items) => [ ...items, stateItem ]);
-  }
+   changeCourses = (update) => this.setCourses(update(this.state.courses));
 
-  removeCourse = (id) => {
-    // const idx = this.findIndex(id);
-    // this.changeCourses((items) => [
-    //   ...items.slice(0, idx),
-    //   ...items.slice(idx + 1)
-    // ]);
-  }
+   getCourse = (id) => this.state.courses.find(course=>course.id===id);
 
-  editCourse = (editedCourse) => {
-    // const idx = this.findIndex(editedCourse.id);
-    // this.changeCourses((items) => [
-    //   ...items.slice(0, idx),
-    //   editedCourse,
-    //   ...items.slice(idx + 1)
-    // ]);
-  }
+   findIndex = (id) => this.state.courses.findIndex((course) => course.id===id);
 
-  getCourse = (id) => {
-    // return this.state.courses[id-1];
-  }
-  
+   addCourse = (newCourse) => {
+    ApiService.addCourse(newCourse, (course) =>
+        this.changeCourses((courses) => [...courses, course]));
+   }
+
+   removeCourse = (id) => {
+      ApiService.removeCourse(id, () => {
+          const idx = this.findIndex(id);
+          if (idx>=0) {
+              this.changeCourses((items) =>
+                  [   ...items.slice(0, idx),
+                      ...items.slice(idx + 1)  ]);
+          }
+      });
+   }
+
+   editCourse = (editedCourse) => {
+      ApiService.editCourse(editedCourse, () => {
+          const idx = this.findIndex(editedCourse.id);
+          this.changeCourses((items) =>
+              [ ...items.slice(0, idx),
+                editedCourse,
+                ...items.slice(idx + 1)  ]);
+      });
+   }
+
   render() {
     return (
       <div className="App">
@@ -62,7 +71,8 @@ export default class App extends React.Component {
             <Route path="/courses/"
                  render={ () =>
                   <AvailableCourses
-                                  onRemove={ (course) => this.removeCourse(course) } /> } 
+                                  courses={this.state.courses}
+                                  setCourses={ this.setCourses } /> }
                                   exact />
             <Route path="/courses/add"
                  render={ () => 
@@ -70,15 +80,15 @@ export default class App extends React.Component {
             <Route path="/courses/:id/delete"
                   render={({ match }) => {
                     const { id } = match.params;
-                    this.removeCourse(Number(id)); // todo: fix changing state during render
+                    this.removeCourse(Number(id));
                     return <Redirect to="/courses/" />
-                  }} 
+                  }}
                   exact >
             </Route>
             <Route path="/courses/:id/edit"
                  render={ ({ match }) => {
                     const { id } = match.params;
-                    const oldItem = this.getCourse(id); // todo: fix indexing
+                    const oldItem = this.getCourse(Number(id));
                     return <EditCourse onEdit={ this.editCourse }
                                        course={ oldItem } /> 
                  }} />
@@ -111,15 +121,14 @@ export default class App extends React.Component {
                   exact />
             <Route path="/courses/:id/predelete"
                   render={ ({ match }) => {
-                    const { id } = match.params;
                     const items = this.state.courses;
-                    const idx = this.findIndex(Number(id));
+                    const idx = this.findIndex(Number(match.params.id));
                     const oldItem = this.state.courses[idx];
                     const item = {...oldItem, deleting:true}
                     const stateWithDeleteConfirmationButton = 
-                        [...items.slice(0, idx),
-                        item,
-                        ...items.slice(idx + 1)]
+                        [   ...items.slice(0, idx),
+                            item,
+                            ...items.slice(idx + 1)  ]
                     return <AvailableCourses 
                             courses={stateWithDeleteConfirmationButton} />}} 
                             exact />

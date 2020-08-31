@@ -9,7 +9,7 @@ import './item-list.css'
 import ButtonsGroup from '../buttons-group/buttons-group';
 import VerticalButtonGroup from '../vertical-button-group/vertical-button-group';
 
-const ItemList = ({ items, onRemove, buttons, baseLink }) => {
+const ItemList = ({ items, buttons, baseLink }) => {
     const list = items.map((item) => {
         const { id, deleting } = item;
         const link = `${baseLink}${id}`;
@@ -17,7 +17,7 @@ const ItemList = ({ items, onRemove, buttons, baseLink }) => {
         if (deleting) {
             buttonsGroup = <ButtonsGroup deleteLink={`${link}/delete`}
                                     cancelLink={baseLink} />
-            itemComponent = (<DeletingItem item={item} buttons={buttonsGroup} onRemove={()=>onRemove(id)} />)
+            itemComponent = (<DeletingItem item={item} buttons={buttonsGroup} />)
         } else if (buttons){
             if (buttons.vertical){
                 buttonsGroup = <VerticalButtonGroup teacherLink={buttons.teacher} reviewLink={buttons.review} />
