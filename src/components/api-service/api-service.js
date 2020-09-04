@@ -1,4 +1,5 @@
 import RequestTemplates from "./request-templates";
+import objectAdapter from "./object-adapter";
 
 export default class ApiService {
     static _apiBase = "/api";
@@ -38,11 +39,13 @@ export default class ApiService {
 
     static updateCourses(setCourses) {
         RequestTemplates.getData(this._apiBase + "/courses")
-            .then(courses=>setCourses(courses));
+            .then(courses=>objectAdapter(courses, 'title', 'label'))
+            .then(setCourses);
     }
 
     static editCourse(course, editAppState) {
-        RequestTemplates.putData(this._apiBase + "/courses/" + course.id, course)
+        let courseDto = objectAdapter(course, 'label', 'title');
+        RequestTemplates.putData(this._apiBase + "/courses/" + course.id, courseDto)
             .then(()=>editAppState(course));
     }
 
@@ -52,10 +55,42 @@ export default class ApiService {
     }
 
     static addCourse(course, editAppState) {
-        RequestTemplates.postData(this._apiBase + "/courses/", course)
+        let courseDto = objectAdapter(course, 'label', 'title');
+        RequestTemplates.postData(this._apiBase + "/courses/", courseDto)
             .then(resp=>{
                 course.id = resp.value;
                 editAppState(course)
             });
+    }
+
+    static getContent(course_id, contentType, editPageContent) {
+        RequestTemplates.getData(this._apiBase + "/courses/" + course_id + "/" + contentType)
+            .then(editPageContent);
+    }
+
+    static getStudents (course_id, editStudentList) {
+        RequestTemplates.getData(this._apiBase + "/courses/" + course_id + "/students")
+            .then(students=>objectAdapter(students, 'name', 'label'))
+            .then(editStudentList);
+    }
+
+    static _getStudentBaseUrl(course_id, student_id) {
+        return this._apiBase + "/courses/" + course_id + "/students/" + student_id;
+    }
+
+    static getMessages(course_id, student_id, amount, editMessageBox) {
+        RequestTemplates.getData(this._getStudentBaseUrl(course_id, student_id) + "?amount=" + amount)
+            .then(editMessageBox);
+    }
+
+    static searchMessages(course_id, student_id, amount, text, editMessageBox) {
+        RequestTemplates.getData(this._getStudentBaseUrl(course_id, student_id)
+            + "?amount=" + amount + "&text=" + text)
+            .then(editMessageBox);
+    }
+
+    static getResume(student_id, editResumePage) {
+        RequestTemplates.getData(this._apiBase + "/students/" + student_id + "/resume")
+            .then(editResumePage);
     }
 }

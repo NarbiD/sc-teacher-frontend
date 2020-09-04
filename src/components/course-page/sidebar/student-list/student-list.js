@@ -5,13 +5,10 @@ import ItemList from '../../../item-list/item-list';
 import './student-list.css'
 
 const StudentList = ({ courseId, students }) => {
-    const buttons = {
-        message:true
-    }
     return <div className="student-list overflow-auto">
                 <ItemList items={students}
                         onRemove={()=>{}} 
-                        buttons={buttons}
+                        buttons={{ message:true }}
                         baseLink={`/courses/${courseId}/students/`} /> 
            </div>
 }

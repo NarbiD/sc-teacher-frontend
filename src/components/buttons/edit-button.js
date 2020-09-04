@@ -7,7 +7,7 @@ const EditButton = ({ link }) => {
     return (
         <Link to={link}
             className="btn btn-outline-warning btn-sm btn-icon">
-                <i className="far fa-edit"></i>
+                <span className="far fa-edit"/>
         </Link>);
 }
 

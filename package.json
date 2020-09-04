@@ -1,11 +1,12 @@
 {
   "name": "teacher_bot",
   "version": "1.0.0",
+  "homepage": "./",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack --hot --history-api-fallback"
   },
   "keywords": [],
   "author": "",

@@ -34,7 +34,6 @@ export default class Header extends Component{
     }
 
     componentDidMount() {
-        console.log(Date.now() + " " + ApiService.getCookie(ApiService._apiToken));
         let token = ApiService.getCookie(ApiService._apiToken);
         this.setTab(token!==undefined && token!=="");
     }

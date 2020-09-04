@@ -6,7 +6,7 @@ const SignInButton = ({ onSubmit }) => {
     return (
         <button type="submit"
                 className="btn btn-outline-success send-btn btn-icon">
-            <i className="fas fa-sign-in-alt" />
+            <span className="fas fa-sign-in-alt" />
         </button>);
 }
 

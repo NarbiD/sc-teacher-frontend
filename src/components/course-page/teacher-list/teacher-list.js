@@ -1,10 +1,5 @@
 import React from 'react';
 
-// import './item-list.css'
-
-// import DeletingItem from './deletingItem/deletingItem';
-
-// import './item-list.css'
 import ButtonsGroup from '../../buttons-group/buttons-group';
 import TeacherItem from '../teacher-item/teacher-item';
 
@@ -12,11 +7,7 @@ const TeacherList = ({ items, onRemove, buttons, baseLink }) => {
     const list = items.map((item) => {
         const { id, deleting } = item;
         let itemComponent, buttonsGroup;
-        if (deleting) {
-            // buttonsGroup = <ButtonsGroup deleteLink={`${link}/delete`}
-            //                         cancelLink={baseLink} />
-            // itemComponent = (<DeletingItem item={item} buttons={buttonsGroup} onRemove={()=>onRemove(id)} />)
-        } else if (buttons){
+        if (buttons){
             console.log(buttons);
             buttonsGroup = <ButtonsGroup deleteLink={ buttons.delete ? `${baseLink}${id}/predelete` : undefined }
                           editLink={ buttons.edit ? `${baseLink}${id}/edit` : undefined }

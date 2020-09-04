@@ -6,7 +6,7 @@ const AttachmentButton = () => {
     return (
         <button
             className="btn btn-outline-secondary">
-                <i className="fas fa-paperclip"></i>
+                <span className="fas fa-paperclip"/>
         </button>
     );
 }

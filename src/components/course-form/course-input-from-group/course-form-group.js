@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-	withRouter
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import InputFormRow from '../../form-elements/input-form-row';
 import CourseDuration from '../course-duration/course-duration/course-duration';
 import InputFormCheckbox from '../../form-elements/input-checkbox';
@@ -71,11 +69,11 @@ class CourseFormGroup extends Component{
             <button 
                 type="submit" 
                 className="btn btn-outline-primary create-button float-right" >
-                <span className="fa fa-plus"></span>
+                <span className="fa fa-plus" />
                 <span> Зберігти</span>
             </button>
         </form>)
     };
-};
+}
 
 export default withRouter(CourseFormGroup);

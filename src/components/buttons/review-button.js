@@ -7,7 +7,7 @@ const ReviewButton = ({ link }) => {
     return (
         <Link to={link}
             className="btn btn-outline-success btn-sm btn-label">
-                <i className="far fa-file-alt"> Відгук викладача</i>
+                <span className="far fa-file-alt"> Відгук викладача</span>
         </Link>
     );
 }

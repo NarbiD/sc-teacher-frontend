@@ -8,7 +8,7 @@ const DeleteButton = ({ link, onRemove }) => {
         <Link to={link}
             className="btn btn-outline-danger btn-sm btn-icon"
             onClick={ onRemove }>
-                <i className="far fa-trash-alt"></i>
+                <span className="far fa-trash-alt" />
         </Link>
     );
 }

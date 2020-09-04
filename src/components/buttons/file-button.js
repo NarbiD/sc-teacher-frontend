@@ -6,7 +6,7 @@ const FileButton = () => {
     return (
         <button
             className="btn btn-outline-light btn-sm btn-icon attachment">
-                <i className="fas fa-paperclip"></i>
+                <span className="fas fa-paperclip"/>
         </button>
     );
 }

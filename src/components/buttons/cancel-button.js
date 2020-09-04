@@ -7,7 +7,7 @@ const CancelButton = ({ link }) => {
     return (
         <Link to={link}
             className="btn btn-outline-secondary btn-sm btn-icon">
-                <i className="fas fa-undo"></i>
+                <span className="fas fa-undo"/>
         </Link>
     );
 }

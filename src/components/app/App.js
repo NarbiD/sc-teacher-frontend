@@ -7,17 +7,12 @@ import Header from '../header/header';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import CreateCourse from '../create-course/create-course';
 import EditCourse from '../edit-course/edit-course';
-import PageTitle from '../page-title/page-title';
 import CoursePage from '../course-page/course-page';
 import Home from '../home/home'
 import Footer from '../footer/footer';
 import SingUp from "../sign-up/sign-up";
-import SignInForm from "../sign-in-form/sign-in-form";
 import SingIn from "../sign-in/sign-in";
 import ApiService from "../api-service/api-service";
-import RequestTemplates from "../api-service/request-templates";
-
-
 
 export default class App extends React.Component {
 
@@ -114,8 +109,7 @@ export default class App extends React.Component {
             <Route path="/courses/:id"
                   render={ ({ match }) => {
                       const { id } = match.params;
-                      const course = this.getCourse(id);
-                      return <CoursePage label={`Курс "${course.label}"`} id={id} />
+                      return <CoursePage id={id} />
                     }
                   } 
                   exact />
@@ -130,7 +124,8 @@ export default class App extends React.Component {
                             item,
                             ...items.slice(idx + 1)  ]
                     return <AvailableCourses 
-                            courses={stateWithDeleteConfirmationButton} />}} 
+                            courses={stateWithDeleteConfirmationButton} />}}
+                            setCourses={ this.setCourses } /> }
                             exact />
             <Route path="/courses/:id/tasks"
                  render={ () => <CoursePage  /> } />
@@ -138,10 +133,15 @@ export default class App extends React.Component {
                  render={ () => <SingIn /> } />
             <Route path="/signup"
                  render={ () => <SingUp /> } />
+              <Route path="**/*.css."
+                            render={ () => {
+                                ApiService.signOut();
+                                return <Redirect to="/main.css"/> }} />
             <Route path="/signout"
                  render={ () => {
                          ApiService.signOut();
                          return <Redirect to="/"/>
+
                      }} />
           </Switch>
         </Router>
